@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>Заполнить по индексу</title>
+
+    <link href="../../jquery.kladr.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+
+    <script src="../lib/jquery-1.11.1.min.js" type="text/javascript"></script>
+    <script src="../../jquery.kladr.min.js" type="text/javascript"></script>
+    <script src="script.js" type="text/javascript"></script>
+
+    <script src="http://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+</head>
+    <body>
+        <div class="address">
+            <h1>Заполнение по индексу</h1>
+            <form class="js-form-address">
+                <div class="field">
+                    <label>Индекс</label>
+                    <input type="text" name="zip">
+                </div>
+
+                <div class="field">
+                    <label>Регион</label>
+                    <input type="text" name="region" disabled="true">
+                </div>
+                <div class="field">
+                    <label>Район</label>
+                    <input type="text" name="district" disabled="true">
+                </div>
+                <div class="field">
+                    <label>Город</label>
+                    <input type="text" name="city" disabled="true">
+                </div>
+                <div class="field">
+                    <label>Улица</label>
+                    <input type="text" name="street" disabled="true">
+                </div>
+                <div class="field">
+                    <label>Дом</label>
+                    <input type="text" name="building" disabled="true">
+                </div>
+
+                <div class="tooltip" style="display: none;"><b></b><span></span></div>
+            </form>
+        </div>
+    </body>
+</html>

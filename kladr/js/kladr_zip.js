@@ -1,5 +1,5 @@
 (function ($) {
-	$.fn.kladrZip = function (selector) {
+	$.fn.kladrZip = function (selector, found) {
 		this.keydown(function (e) {
 			var key = e.charCode || e.keyCode || 0,
 				allow = (
@@ -47,6 +47,7 @@
 
 					objs.push(obj);
 					$.kladr.setValues(objs, selector);
+					found && found(obj);
 				}
 				else {
 					error(true);

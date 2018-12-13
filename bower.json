@@ -1,20 +1,14 @@
 {
-  "name": "jquery.kladr",
-  "version": "2.2.1",
+  "name": "jquery.fias",
+  "version": "1.0.0",
   "main": "jquery.kladr.min.js",
-  "homepage": "https://github.com/garakh/kladrapi-jsclient",
-  "authors": [
-    {
-      "name": "Alexandr Yakovlev",
-      "email": "xescoder@gmail.com",
-      "homepage": "https://www.linkedin.com/in/xescoder"
-    }
-  ],
+  "homepage": "https://github.com/fias-api/jquery",
   "license": "Public Domain",
-  "description": "jQuery Kladr",
+  "description": "jQuery Plugin For kladr-api.ru",
   "keywords": [
     "kladr",
-    "jquery"
+    "jquery",
+    "fias"
   ],
   "ignore": [
     "gulpfile.js",

@@ -14,21 +14,21 @@
     overflow-y: auto;
     min-width: 200px;
     max-height: 420px;
-    color: #313131;
+    color: #5c5e8d;
 }
 
 #kladr_autocomplete li {
     display: list-item;
     list-style-type: none;
     margin: 0;
-    padding: 8px 10px;
+    padding: 6px 10px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
 }
 
 #kladr_autocomplete li + li {
-    border-top: 1px solid #ededed;
+
 }
 
 #kladr_autocomplete li:hover {
@@ -45,7 +45,20 @@
 }
 
 #kladr_autocomplete strong {
-    color: #038ebd;
+    /*color: #038ebd;*/
+    font-weight: bold;
+}
+
+#kladr_autocomplete a,
+#kladr_autocomplete strong,
+#kladr_autocomplete small {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 14px;
+}
+
+#kladr_autocomplete small {
+    color: #AAA;
+    font-size: 12px;
 }
 
 #kladr_autocomplete .spinner {
