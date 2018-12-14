@@ -648,10 +648,10 @@
                     var dataVal = value.replace(/(["])/g, "\\$1");
                     var title = $('<div>' + label + '</div>').text().replace(/(["])/g, "\\$1");
 
-                    $a = $('<a data-val="' + dataVal + '" title="' + title + '">' + label + '</a>');
+                    $a = $('<a data-val="' + dataVal + '">' + label + '</a>');
                     $a.data('kladr-object', obj);
 
-                    $('<li></li>')
+                    $('<li title="' + title + '"></li>')
                         .append($a)
                         .appendTo($ac);
                 }
