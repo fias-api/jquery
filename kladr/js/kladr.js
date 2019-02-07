@@ -257,7 +257,7 @@
          * @param {{}|[]} values Список значений
          * @param {*} selector Селектор, ограничивающий поиск полей ввода
          */
-        setValues: function (values, selector) {
+        setValues: function (values, selector, sender) {
             var changeEvent = 'kladr_change.setvalues',
                 types = $.kladr.type,
                 filtered = {},
@@ -316,7 +316,7 @@
                         set();
                     })
                     .kladr('controller')
-                    .setValue(value);
+                    .setValue(value, sender);
             })();
         },
 
@@ -991,21 +991,21 @@
                      * @param {*} value
                      * @returns {{}} Контроллер плагина
                      */
-                    setValue: function (value) {
+                    setValue: function (value, sender) {
                         if ($.type(value) === 'object') {
-                            return controller.setValueByObject(value);
+                            return controller.setValueByObject(value, sender);
                         }
 
                         if ($.type(value) === 'number') {
-                            return controller.setValueById(value);
+                            return controller.setValueById(value, sender);
                         }
 
                         if ($.type(value) === 'string') {
-                            return controller.setValueByName(value);
+                            return controller.setValueByName(value, sender);
                         }
 
                         if (!value) {
-                            return controller.clear();
+                            return controller.clear(sender);
                         }
 
                         return controller;
@@ -1017,7 +1017,7 @@
                      * @param {string} name Название объекта КЛАДР
                      * @returns {{}} Контроллер плагина
                      */
-                    setValueByName: function (name) {
+                    setValueByName: function (name, sender) {
                         name = $.trim(name + '');
 
                         if (name) {
@@ -1028,7 +1028,7 @@
                             query.limit = 10;
 
                             if (!trigger('send_before', query)) {
-                                changeValue(null, query);
+                                changeValue(null, query, sender);
                                 return controller;
                             }
 
@@ -1051,7 +1051,7 @@
                                     }
                                 }
 
-                                changeValue(obj, query);
+                                changeValue(obj, query, sender);
                             });
                         }
 
@@ -1064,7 +1064,7 @@
                      * @param {number} id Идентификатор объекта КЛАДР
                      * @returns {{}} Контроллер плагина
                      */
-                    setValueById: function (id) {
+                    setValueById: function (id, sender) {
                         var query = getQuery('');
 
                         query.parentType = query.type;
@@ -1075,8 +1075,8 @@
 
                         $.kladr.api(query, function (objs) {
                             objs.length
-                                ? changeValue(objs[0], query)
-                                : changeValue(null, query);
+                                ? changeValue(objs[0], query, sender)
+                                : changeValue(null, query, sender);
                         });
 
                         return controller;
@@ -1088,8 +1088,8 @@
                      * @param {{}} obj Объект КЛАДР
                      * @returns {{}} Контроллер плагина
                      */
-                    setValueByObject: function (obj) {
-                        changeValue(obj, getQuery(''));
+                    setValueByObject: function (obj, sender) {
+                        changeValue(obj, getQuery(''), sender);
                         return controller;
                     },
 
@@ -1098,8 +1098,8 @@
                      *
                      * @returns {{}} Контроллер плагина
                      */
-                    clear: function () {
-                        changeValue(null, null);
+                    clear: function (sender) {
+                        changeValue(null, null, sender);
                         return controller;
                     }
                 };
@@ -1119,9 +1119,9 @@
                  * @param {{}} obj Объект КЛАДР
                  * @param {{}} query Объект запроса к сервису
                  */
-                function changeValue(obj, query) {
+                function changeValue(obj, query, sender) {
                     obj ? $input.val(get('valueFormat')(obj, query)) : error(true);
-                    setCurrent(obj);
+                    setCurrent(obj, sender);
                     $input.removeAttr(lockAttr);
                 }
 
@@ -1181,7 +1181,7 @@
              * @param {{}} obj Объект передаваемый в событие
              * @returns {boolean} Выполнить действие идущее после события
              */
-            function trigger(event, obj) {
+            function trigger(event, obj, sender) {
                 if (!event) {
                     return true;
                 }
@@ -1193,7 +1193,7 @@
                 $input.trigger('kladr_' + event, obj);
 
                 if ($.type(get(eventProp)) === 'function') {
-                    return get(eventProp).call($input.get(0), obj) !== false;
+                    return get(eventProp).call($input.get(0), obj, sender) !== false;
                 }
 
                 return true;
@@ -1227,7 +1227,6 @@
                 var query = {},
                     fields = [
                         'token',
-                        'key',
                         'type',
                         'typeCode',
                         'parentType',
@@ -1331,7 +1330,7 @@
              *
              * @param {{}} obj
              */
-            function setCurrent(obj) {
+            function setCurrent(obj, sender) {
                 var curr = get('current');
 
                 if ((curr && curr.id) === (obj && obj.id)) {
@@ -1352,7 +1351,7 @@
                     }
                 }
 
-                trigger('change', obj);
+                trigger('change', obj, sender);
             }
 
             /**
