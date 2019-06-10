@@ -1,5 +1,5 @@
 (function ($, window) {
-    $.kladr = {};
+    $.fias = {};
     var ajaxQueue = [];
     var clearAjaxQueue = function () {
         while (ajaxQueue.length > 1) {
@@ -26,7 +26,7 @@
      *
      * @type {{region: string, district: string, city: string, street: string, building: string}}
      */
-    $.kladr.type = {
+    $.fias.type = {
         region: 'region',   // Область
         district: 'district', // Район
         city: 'city',     // Город
@@ -39,7 +39,7 @@
      *
      * @type {{city: number, settlement: number, village: number}}
      */
-    $.kladr.typeCode = {
+    $.fias.typeCode = {
         city: 1, // Город
         settlement: 2, // Посёлок
         village: 4  // Деревня
@@ -51,8 +51,8 @@
      * @param {{}} query Запрос
      * @returns {boolean}
      */
-    $.kladr.validate = function (query) {
-        var type = $.kladr.type;
+    $.fias.validate = function (query) {
+        var type = $.fias.type;
 
         switch (query.type) {
             case type.region:
@@ -118,13 +118,13 @@
      * @param {{}} query Запрос
      * @param {Function} callback Функция, которой будет передан массив полученных объектов
      */
-    $.kladr.api = function (query, callback) {
+    $.fias.api = function (query, callback) {
         if (!callback) {
             error('Callback undefined');
             return;
         }
 
-        if (!$.kladr.validate(query)) {
+        if (!$.fias.validate(query)) {
             callback([]);
             return;
         }
@@ -133,11 +133,11 @@
         var timeout = setTimeout(function () {
             callback([]);
             timeout = null;
-        }, $.kladr.timeout);
+        }, $.fias.timeout);
 
         clearAjaxQueue();
         var a = $.ajax({
-            url: $.kladr.url + '?callback=?',
+            url: $.fias.url + '?callback=?',
             type: 'get',
             data: toApiFormat(query),
             dataType: 'jsonp'
@@ -152,7 +152,7 @@
         });
     };
 
-    $.kladr.api = debounce($.kladr.api, 250);
+    $.fias.api = debounce($.fias.api, 250);
 
     /**
      * Проверяет существование объекта, соответствующего запросу
@@ -161,7 +161,7 @@
      * @param {Function} callback Функция, которой будет передан объект, если он существует, или
      * false если не существует.
      */
-    $.kladr.check = function (query, callback) {
+    $.fias.check = function (query, callback) {
         if (!callback) {
             error('Callback undefined');
             return;
@@ -170,7 +170,7 @@
         query.withParents = false;
         query.limit = 1;
 
-        $.kladr.api(query, function (objs) {
+        $.fias.api(query, function (objs) {
             objs && objs.length
                 ? callback(objs[0])
                 : callback(false);

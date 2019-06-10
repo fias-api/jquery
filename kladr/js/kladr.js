@@ -45,7 +45,7 @@
          * @param {Function} callback
          */
         source: function (query, callback) {
-            $.kladr.api(query, callback);
+            $.fias.api(query, callback);
         },
 
         /**
@@ -90,7 +90,7 @@
                     objs = [].concat(obj.parents);
                     objs.push(obj);
 
-                    return replacer($.kladr.buildAddress(objs));
+                    return replacer($.fias.buildAddress(objs));
                 }
 
                 return replacer((obj.typeShort ? obj.typeShort + '. ' : '') + obj.name);
@@ -133,7 +133,7 @@
                     objs = [].concat(obj.parents);
                     objs.push(obj);
 
-                    return $.kladr.buildAddress(objs);
+                    return $.fias.buildAddress(objs);
                 }
 
                 return (obj.typeShort ? obj.typeShort + '. ' : '') + obj.name;
@@ -199,7 +199,7 @@
         enter: 13
     };
 
-    $.kladr = $.extend($.kladr, {
+    $.fias = $.extend($.fias, {
 
         /**
          * Устанавливает значения по умолчанию для параметров плагина
@@ -259,7 +259,7 @@
          */
         setValues: function (values, selector, sender) {
             var changeEvent = 'kladr_change.setvalues',
-                types = $.kladr.type,
+                types = $.fias.type,
                 filtered = {},
                 sorted = {},
                 $inputs, t;
@@ -286,7 +286,7 @@
                 }
             }
 
-            $inputs = $.kladr.getInputs(selector);
+            $inputs = $.fias.getInputs(selector);
 
             (function set() {
                 var $input, type, value;
@@ -315,7 +315,7 @@
                         $input.off(changeEvent);
                         set();
                     })
-                    .kladr('controller')
+                    .fias('controller')
                     .setValue(value, sender);
             })();
         },
@@ -328,8 +328,8 @@
          * @returns {string}
          */
         getAddress: function (selector, build) {
-            var $inputs = $.kladr.getInputs(selector),
-                types = $.kladr.type,
+            var $inputs = $.fias.getInputs(selector),
+                types = $.fias.type,
                 filtered = {},
                 sorted = {},
                 t;
@@ -339,7 +339,7 @@
                     obj, objs, i;
 
                 if ($this.attr('data-kladr-id')) {
-                    obj = $this.kladr('current');
+                    obj = $this.fias('current');
 
                     if ($this.attr('data-kladr-one-string') && obj.parents) {
                         objs = [].concat(obj.parents);
@@ -364,7 +364,7 @@
                 }
             }
 
-            return (build || $.kladr.buildAddress)(sorted);
+            return (build || $.fias.buildAddress)(sorted);
         },
 
         /**
@@ -410,12 +410,12 @@
         }
     });
 
-    $.fn.kladr = function (param1, param2) {
+    $.fn.fias = function (param1, param2) {
         var params = readParams(param1, param2),
             result = null;
 
         this.each(function () {
-            var res = kladr($(this), params);
+            var res = fias($(this), params);
 
             if (params.isGet) {
                 result = res;
@@ -437,7 +437,7 @@
      * @param {{}} params Объект параметров
      * @returns {*}
      */
-    function kladr($input, params) {
+    function fias($input, params) {
 
         /**
          * Хранилище параметров плагина
@@ -1073,7 +1073,7 @@
 
                         lock();
 
-                        $.kladr.api(query, function (objs) {
+                        $.fias.api(query, function (objs) {
                             objs.length
                                 ? changeValue(objs[0], query, sender)
                                 : changeValue(null, query, sender);
@@ -1149,7 +1149,7 @@
                         var query = getQuery(name),
                             queryType = query.type,
                             queryParentType = query.parentType,
-                            type = $.kladr.type,
+                            type = $.fias.type,
                             parentFilled = true,
                             setByName = get('controller').setValueByName,
                             lock;
@@ -1273,8 +1273,8 @@
              * @returns {{}}
              */
             function getParent(selector, type) {
-                var $inputs = $.kladr.getInputs(selector),
-                    types = $.kladr.type,
+                var $inputs = $.fias.getInputs(selector),
+                    types = $.fias.type,
                     parents = {},
                     parent = null,
                     t;

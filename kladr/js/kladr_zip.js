@@ -1,5 +1,5 @@
 (function ($) {
-	$.fn.kladrZip = function (selector, found) {
+	$.fn.fiasZip = function (selector, found) {
 		this.keydown(function (e) {
 			var key = e.charCode || e.keyCode || 0,
 				allow = (
@@ -29,8 +29,8 @@
 				return;
 			}
 
-			$.kladr.api({
-				type: $.kladr.type.building,
+			$.fias.api({
+				type: $.fias.type.building,
 				zip: zip,
 				withParents: true,
 				limit: 1
@@ -46,7 +46,7 @@
 					}
 
 					objs.push(obj);
-					$.kladr.setValues(objs, selector);
+					$.fias.setValues(objs, selector);
 					found && found(obj);
 				}
 				else {
