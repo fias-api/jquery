@@ -4,5 +4,5 @@ jQuery Kladr
 Исходный код плагина
 
 * **core.js** - Реализует $.kladr.
-* **kladr.js** - Реализует плагин $('input').kladr.
-* **kladr_zip.js** - Реализует плагин $('input').kladrZip.
+* **fias.js** - Реализует плагин $('input').kladr.
+* **fias_zip.js** - Реализует плагин $('input').kladrZip.

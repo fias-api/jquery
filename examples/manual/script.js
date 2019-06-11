@@ -1,11 +1,11 @@
 $(function () {
     var $city = $('[name="city"]');
 
-    $city.kladr({
-        type: $.kladr.type.city,
+    $city.fias({
+        type: $.fias.type.city,
         'withParents': true,
         change: function (obj) {
-            var address = $.kladr.getAddress('.js-form-address');
+            var address = $.fias.getAddress('.js-form-address');
 
             $('#address').text(address);
         },
@@ -15,6 +15,6 @@ $(function () {
         var id = $(this).val();
 
         // Устанавливаем значение поля ввода по id
-        $city.kladr('controller').setValueById(id);
+        $city.fias('controller').setValueById(id);
     });
 });

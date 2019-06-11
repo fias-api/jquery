@@ -8,18 +8,18 @@ gulp.task('default', function () {
 
 	// Javascript
 	gulp.src([
-			'./kladr/js/core.js',
-			'./kladr/js/kladr.js',
-			'./kladr/js/kladr_zip.js'
+			'./src/js/core.js',
+			'./src/js/fias.js',
+			'./src/js/fias_zip.js'
 		])
-		.pipe(concat('jquery.kladr.js'))
+		.pipe(concat('jquery.fias.js'))
 		.pipe(uglify())
 		.pipe(rename({suffix: '.min'}))
 		.pipe(gulp.dest('./'));
 
 	// CSS
-	gulp.src('./kladr/css/style.css')
+	gulp.src('./src/css/style.css')
 		.pipe(csso())
-		.pipe(rename('jquery.kladr.min.css'))
+		.pipe(rename('jquery.fias.min.css'))
 		.pipe(gulp.dest('./'));
 });

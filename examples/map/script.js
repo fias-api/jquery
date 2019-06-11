@@ -8,7 +8,7 @@ $(function () {
     var map = null,
         map_created = false;
 
-    $.kladr.setDefault({
+    $.fias.setDefault({
         parentInput: '.js-form-address',
         verify: true,
         change: function (obj) {
@@ -16,7 +16,7 @@ $(function () {
                 setLabel($(this), obj.type);
 
                 if(obj.parents){
-                    $.kladr.setValues(obj.parents, '.js-form-address');
+                    $.fias.setValues(obj.parents, '.js-form-address');
                 }
             }
 
@@ -36,19 +36,19 @@ $(function () {
         }
     });
 
-    $region.kladr('type', $.kladr.type.region);
-    $district.kladr('type', $.kladr.type.district);
-    $city.kladr('type', $.kladr.type.city);
-    $street.kladr('type', $.kladr.type.street);
-    $building.kladr('type', $.kladr.type.building);
+    $region.fias('type', $.fias.type.region);
+    $district.fias('type', $.fias.type.district);
+    $city.fias('type', $.fias.type.city);
+    $street.fias('type', $.fias.type.street);
+    $building.fias('type', $.fias.type.building);
 
     // Включаем получение родительских объектов для населённых пунктов
-    $district.kladr('withParents', true);
-    $city.kladr('withParents', true);
-    $street.kladr('withParents', true);
+    $district.fias('withParents', true);
+    $city.fias('withParents', true);
+    $street.fias('withParents', true);
 
     // Отключаем проверку введённых данных для строений
-    $building.kladr('verify', false);
+    $building.fias('verify', false);
 
     ymaps.ready(function () {
         if (map_created) return;
@@ -76,7 +76,7 @@ $(function () {
     function mapUpdate() {
         var zoom = 4;
 
-        var address = $.kladr.getAddress('.js-form-address', function (objs) {
+        var address = $.fias.getAddress('.js-form-address', function (objs) {
             var result = '';
 
             $.each(objs, function (i, obj) {
@@ -88,23 +88,23 @@ $(function () {
                     type = ' ' + obj.type;
 
                     switch (obj.contentType) {
-                        case $.kladr.type.region:
+                        case $.fias.type.region:
                             zoom = 4;
                             break;
 
-                        case $.kladr.type.district:
+                        case $.fias.type.district:
                             zoom = 7;
                             break;
 
-                        case $.kladr.type.city:
+                        case $.fias.type.city:
                             zoom = 10;
                             break;
 
-                        case $.kladr.type.street:
+                        case $.fias.type.street:
                             zoom = 13;
                             break;
 
-                        case $.kladr.type.building:
+                        case $.fias.type.building:
                             zoom = 16;
                             break;
                     }
@@ -137,7 +137,7 @@ $(function () {
     }
 
     function addressUpdate() {
-        var address = $.kladr.getAddress('.js-form-address');
+        var address = $.fias.getAddress('.js-form-address');
 
         $('#address').text(address);
     }

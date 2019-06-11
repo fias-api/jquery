@@ -2,7 +2,7 @@ $(function () {
 	var $address = $('[name="address"]'),
 		$parent = $('[name="parent"]');
 
-	$address.kladr({
+	$address.fias({
 		oneString: true,
 		change: function (obj) {
 			log(obj);
@@ -21,17 +21,17 @@ $(function () {
 
 		switch (value) {
 			case 'moscow':
-				parentType = $.kladr.type.region;
+				parentType = $.fias.type.region;
 				parentId = '7700000000000';
 				break;
 
 			case 'petersburg':
-				parentType = $.kladr.type.region;
+				parentType = $.fias.type.region;
 				parentId = '7800000000000';
 				break;
 		}
 
-		$address.kladr({
+		$address.fias({
 			parentType: parentType,
 			parentId: parentId
 		});

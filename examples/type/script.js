@@ -2,8 +2,8 @@ $(function () {
     var $city = $('[name="city"]'),
         $typeCode = $('[name="typecode"]');
 
-    $city.kladr({
-        type: $.kladr.type.city,
+    $city.fias({
+        type: $.fias.type.city,
         'withParents': true
     });
 
@@ -18,18 +18,18 @@ $(function () {
 
         switch (value) {
             case 'city':
-                typeCode = $.kladr.typeCode.city;
+                typeCode = $.fias.typeCode.city;
                 break;
 
             case 'settlement':
-                typeCode = $.kladr.typeCode.city + $.kladr.typeCode.settlement;
+                typeCode = $.fias.typeCode.city + $.fias.typeCode.settlement;
                 break;
 
             case 'all':
-                typeCode = $.kladr.typeCode.city + $.kladr.typeCode.settlement + $.kladr.typeCode.village;
+                typeCode = $.fias.typeCode.city + $.fias.typeCode.settlement + $.fias.typeCode.village;
                 break;
         }
 
-        $city.kladr('typeCode', typeCode);
+        $city.fias('typeCode', typeCode);
     }
 });

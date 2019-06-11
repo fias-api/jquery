@@ -1,8 +1,15 @@
 (function ($, window) {
     $.fias = {};
+
+    (function () {
+        var protocol = 'https:';
+        $.fias.url = protocol + '//kladr-api.ru/api.php';
+        $.fias.timeout = 3000;
+    })();
+
     var ajaxQueue = [];
     var clearAjaxQueue = function () {
-        while (ajaxQueue.length > 1) {
+        while (ajaxQueue.length > 5) {
             var a = ajaxQueue.shift();
             a.abort();
         }
@@ -135,6 +142,10 @@
             timeout = null;
         }, $.fias.timeout);
 
+        if(!query.token && $.fias.token) {
+            query.token = $.fias.token;
+        }
+
         clearAjaxQueue();
         var a = $.ajax({
             url: $.fias.url + '?callback=?',
@@ -152,7 +163,7 @@
         });
     };
 
-    $.fias.api = debounce($.fias.api, 250);
+    //$.fias.api = debounce($.fias.api, 250);
 
     /**
      * Проверяет существование объекта, соответствующего запросу

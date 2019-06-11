@@ -8,7 +8,7 @@ $(function () {
 
     var $tooltip = $('.tooltip');
 
-    $.kladr.setDefault({
+    $.fias.setDefault({
         parentInput: '.js-form-address',
         verify: true,
         select: function (obj) {
@@ -36,7 +36,7 @@ $(function () {
         },
         change: function (obj) {
             if(obj && obj.parents){
-                $.kladr.setValues(obj.parents, '.js-form-address');
+                $.fias.setValues(obj.parents, '.js-form-address');
             }
 
             if(obj && obj.zip){
@@ -45,22 +45,22 @@ $(function () {
         },
     });
 
-    $region.kladr('type', $.kladr.type.region);
-    $district.kladr('type', $.kladr.type.district);
-    $city.kladr('type', $.kladr.type.city);
-    $street.kladr('type', $.kladr.type.street);
-    $building.kladr('type', $.kladr.type.building);
+    $region.fias('type', $.fias.type.region);
+    $district.fias('type', $.fias.type.district);
+    $city.fias('type', $.fias.type.city);
+    $street.fias('type', $.fias.type.street);
+    $building.fias('type', $.fias.type.building);
 
-    $district.kladr('withParents', true);
-    $city.kladr('withParents', true);
-    $street.kladr('withParents', true);
+    $district.fias('withParents', true);
+    $city.fias('withParents', true);
+    $street.fias('withParents', true);
 
 
     // Отключаем проверку введённых данных для строений
-    $building.kladr('verify', false);
+    $building.fias('verify', false);
 
     // Подключаем плагин для почтового индекса
-    // $zip.kladrZip('.js-form-address');
+    // $zip.fiasZip('.js-form-address');
 
     function setLabel($input, text) {
         text = text.charAt(0).toUpperCase() + text.substr(1).toLowerCase();
